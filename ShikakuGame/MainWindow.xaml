@@ -1,0 +1,94 @@
+﻿<Window x:Class="ShikakuGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Shikaku Game"
+        Background="#FFFAFAFA">
+    <!-- Світлий фон для вікна -->
+    <Window.Resources>
+        <!-- Стиль для кнопок -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF2196F3"/>
+            <!-- Блакитний фон -->
+            <Setter Property="Foreground" Value="White"/>
+            <!-- Білий текст -->
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <!-- Ефект наведення курсора -->
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF1976D2"/>
+                    <!-- Темніший блакитний -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль для верхньої та нижньої панелі -->
+        <Style TargetType="StackPanel" x:Key="ButtonPanelStyle">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,10,0,10"/>
+        </Style>
+
+        <!-- Стиль для клітинок гри (Border) -->
+        <Style TargetType="Border" x:Key="GameCellBorder">
+            <Setter Property="BorderBrush" Value="#FFBDBDBD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <!-- Стиль для тексту в клітинках гри (TextBlock) -->
+        <Style TargetType="TextBlock" x:Key="GameCellText">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#FF212121"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <!-- Визначаємо рядки в Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Верхня панель кнопок -->
+            <RowDefinition/>
+            <!-- Сітка гри -->
+            <RowDefinition Height="Auto"/>
+            <!-- Нижня панель кнопок -->
+        </Grid.RowDefinitions>
+
+        <!-- Верхня панель кнопок -->
+        <StackPanel Grid.Row="0" Style="{StaticResource ButtonPanelStyle}">
+            <Button Content="5х5" Click="Game5x5_Click"/>
+            <Button Content="7х7" Click="Game7x7_Click"/>
+            <Button Content="10х10" Click="Game10x10_Click"/>
+            <Button Content="15х15" Click="Game15x15_Click"/>
+        </StackPanel>
+
+        <!-- Сітка гри -->
+        <Grid Name="GameGrid" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+            <!-- Сітка буде динамічно заповнюватися клітинками на старті гри -->
+        </Grid>
+
+        <!-- Нижня панель кнопок -->
+        <StackPanel Grid.Row="2" Style="{StaticResource ButtonPanelStyle}">
+            <Button Content="Cпочатку" Click="Clear_Click" Background="DarkSlateGray"/>
+            <Button Content="Нова гра" Click="NewGame_Click" Background="Green"/>
+            <Button Content="Рішення" Click="ShowSolution_Click" Background="Red"/>
+        </StackPanel>
+    </Grid>
+</Window>
